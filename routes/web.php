@@ -20,3 +20,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+    route::get('/checkRole',[App\Http\Controllers\HomeController::class,'checkRole'])->name('checkRole');
+
+    Route::group(['middleware' => ['isAdmin']], function () {
+
+        route::get('/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
+    });
+
+    Route::group(['middleware' => ['isUser']], function () {
+
+        route::get('/user',[App\Http\Controllers\HomeController::class,'user'])->name('user');
+    });
+});
