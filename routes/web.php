@@ -28,11 +28,14 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['isAdmin']], function () {
 
-        route::get('/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
+        route::get('admin/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
+
     });
+
 
     Route::group(['middleware' => ['isUser']], function () {
 
-        route::get('/user',[App\Http\Controllers\HomeController::class,'user'])->name('user');
+        route::get('user/user',[App\Http\Controllers\HomeController::class,'user'])->name('user');
+    
     });
 });

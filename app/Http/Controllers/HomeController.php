@@ -29,12 +29,12 @@ class HomeController extends Controller
 
     public function admin()
     {
-        dd("welcome admin");
+        return view("admin.admin");
     }
 
     public function user()
     {
-       dd("welcome user");
+       return view("user.user");
     }
     public function checkRole(Request $request){
         if(Auth::user()->role_id == 1){
