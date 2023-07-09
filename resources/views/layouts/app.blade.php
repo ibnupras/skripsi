@@ -19,13 +19,19 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
+  
+    <!-- OpenLayers CSS -->
+    <script src="{{ asset('css/ol.css') }}"></script>
+    <!-- OpenLayers JS -->
+    <script src="{{ asset('js/ol.js') }}"></script>
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    BIS GIS
+                <a class="navbar-brand" href="{{ auth()->check() && auth()->user()->role_id == 1 ? route('admin') : (auth()->check() && auth()->user()->role_id == 2 ? route('user') : '#') }}">
+                    BSI GIS
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,14 +47,20 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <!-- @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li> -->
-                            @endif
-                           
+                            
                         
+                           
                         @else
+                        @if(auth()->check() && (auth()->user()->role_id == 1 || auth()->check() && auth()->user()->role_id == 2))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('survey') }}">{{ __('survey') }}</a>
+                                </li>
+                            @endif
+                            @if(auth()->check() && auth()->user()->role_id == 1 && Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                         <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -66,19 +78,21 @@
                                     </form>
                                 </div>
                             </li>
+                            
                         @endguest
-                        @if(auth()->check() && auth()->user()->role_id == 1 && Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        
+                        
                     </ul>
+                    
+                        
+                   
                 </div>
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
+        <main class="pb-4">
+        @yield('content')
+            
         </main>
     </div>
 </body>
