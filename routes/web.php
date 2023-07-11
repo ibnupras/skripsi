@@ -20,17 +20,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
+
 
 
 
 Route::group(['middleware' => ['auth']], function () {
     route::get('/checkRole',[App\Http\Controllers\HomeController::class,'checkRole'])->name('checkRole');
+    Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 
     Route::group(['middleware' => ['isAdmin']], function () {
 
         route::get('admin/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
-        Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
+
 
     });
 
@@ -38,6 +39,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['isUser']], function () {
 
         route::get('user/user',[App\Http\Controllers\HomeController::class,'user'])->name('user');
-        Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
+
     });
 });
