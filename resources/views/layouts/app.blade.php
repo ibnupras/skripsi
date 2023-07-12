@@ -51,7 +51,7 @@
                         
                            
                         @else
-                        @if(auth()->check() && (auth()->user()->role_id == 1 || auth()->check() && auth()->user()->role_id == 2))
+                        @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('survey') }}">{{ __('survey') }}</a>
                                 </li>
