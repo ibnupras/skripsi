@@ -33,8 +33,12 @@ class SurveyController extends Controller
     }
     public function delete(Request $request,$id)
     {
-        $survey = survey::find($id)->delete();        
-        return redirect()->route('survey');
+        $survey = survey::find($id)->delete();   
+        if ($survey) {
+            return redirect()->route('survey')->with('success', 'Survey deleted successfully.');
+        }
+    
+        return redirect()->route('survey')->with('error', 'Survey not found.');
     }
     
 }
