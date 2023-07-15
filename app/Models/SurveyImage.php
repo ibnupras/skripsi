@@ -10,6 +10,7 @@ class SurveyImage extends Model
     use HasFactory;
     
     protected $fillable = [
+        'survey_id',
         'deskription',
         'name',
         'slug',

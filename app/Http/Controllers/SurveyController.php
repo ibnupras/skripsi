@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Survey;
+use App\Models\SurveyImage;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Auth;
 
 class SurveyController extends Controller
@@ -22,12 +25,27 @@ class SurveyController extends Controller
             'deskription' => 'required',
             'location' => 'required',
         ]);
-        Survey::create([
+        $survey = Survey::create([
             'user_id' =>Auth::user()->id,
             'title' => $request->title,
             'deskription' => $request->deskription,
             'location' => $request->location,
         ]);
+    
+        $images = $request->images;
+
+        foreach($images as $key=>$image){
+            $name = time() . "_" . $image->getClientOriginalName();
+            Storage::disk('dokumen_survey')->put($name, file_get_contents($image));
+            SurveyImage::create([
+                "survey_id" => $survey->id,
+                "deskription" => "-",
+                "name" => $request->imageNames[$key],
+                "slug" => Str::slug($request->imageNames[$key]),
+                "location" => "-",
+            ]);
+
+        }
         
         return redirect()->route('survey');
     }

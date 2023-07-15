@@ -21,7 +21,7 @@
                     <div class="card-header">{{ __('Survey Form') }}</div>
 
                     <div class="card-body">
-                        <form action="{{ route('survey') }}" method="POST">
+                        <form action="{{ route('survey') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -40,12 +40,10 @@
                             </div>
 
                             <div class="image-form">
-                            <label for="status">{{ __('Survey') }}</label>
-                                <span class="text-gray-700">Images</span>
-                                <input type="file" name="images[]"
-                                    class="block w-full mt-1 rounded-md"
-                                    placeholder="" multiple/>
-                            </label>
+                            <div id="listImage">
+                                
+                            </div>
+                            <a href="#" class="btn btn-primary" onclick="TambahGambar()">Tambah</a>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
@@ -97,4 +95,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function TambahGambar() {
+            target = $(`#listImage`);
+            let count = 1;
+            if ($(`#listImage .document:last-child`).data('number')) {
+                count = $(`#listImage .document:last-child`).data('number') + 1;
+            }
+            target.append(`
+                <div class="d-flex document mb-2" data-number="${count}">
+                    <div>
+                        <button type="button" class="btn btn-outline-danger" onclick="removeThis(this)"> Hapus</button>
+                    </div>
+                    <div class="ms-4 col-10">
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="text" required name="imageNames[${count}]" class="form-control required" placeholder="Judul Dokumen">
+                            </div>
+                            <div class="col-9">
+                                <input type="file" required name="images[${count}]" class="form-control required" placeholder="Dokumen" accept="image/*" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `)
+        }
+        function removeThis(param) {
+            $(param).parent().parent().remove();
+        }
+    </script>
 @endsection
