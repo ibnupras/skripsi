@@ -43,7 +43,7 @@ return [
         ],
         'dokumen_survey' => [
             'driver' => 'local',
-            'root'   => public_path() . '/dokumen_bisnis',
+            'root'   => public_path() . '/dokumen_survey',
         ],
         's3' => [
             'driver' => 's3',

@@ -15,7 +15,7 @@ protected $fillable = [
     'title',
     'location',
 ];
-    public function image()
+    public function images()
     {
         return $this->hasMany(SurveyImage::class);
     }

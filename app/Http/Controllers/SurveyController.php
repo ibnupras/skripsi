@@ -42,7 +42,7 @@ class SurveyController extends Controller
                 "deskription" => "-",
                 "name" => $request->imageNames[$key],
                 "slug" => Str::slug($request->imageNames[$key]),
-                "location" => "-",
+                "location" => $name,
             ]);
 
         }

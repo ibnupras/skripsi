@@ -79,7 +79,17 @@
             <td>{{ $survey->deskription }}</td>
             <td>{{ $survey->title }}</td>
             <td>{{ $survey->location }}</td>
-            <td>{{ $survey->image }}</td>
+            <td>
+                @foreach ($survey->images as $file)
+                    <div class="mb-2">
+                        <span role="button" id="document-lampiran"
+                            class="ms-2 text-capitalize fw-bold text-primary"
+                            data-file="{{ asset('dokumen_survey/' . $file->location) }}"
+                            data-type="{{ $file->ext }}"><i class="fas fa-file-pdf"></i>&nbsp; Dokumen
+                            {{ $file->name }} </span>
+                    </div>
+                @endforeach
+            </td>
             <td>
                 <a href="{{ route('survey.delete',['id'=>$survey->id]) }}" class="btn btn-danger">Delete</a>
             </td>
@@ -90,6 +100,21 @@
                         </form>
                     </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="document-preview-img" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 mx-auto d-flex justify-content-center">
+                    <div class="col-6">
+                        <img src="" class="w-100 img-thumbnail">
                     </div>
                 </div>
             </div>
@@ -124,5 +149,18 @@
         function removeThis(param) {
             $(param).parent().parent().remove();
         }
+        $('span#document-lampiran').click(function() {
+            type = $(this).data('type')
+            if (type == "doc") {
+                $('#document-preview .modal-body iframe').attr('src', $(this).data('file'));
+                $('#document-preview .modal-title').text($(this).text());
+                $('#document-preview').modal('show');
+            } else {
+                $('#document-preview-img .modal-body img').attr('src', $(this).data('file'));
+                $('#document-preview-img .modal-title').text($(this).text());
+                $('#document-preview-img').modal('show');
+            }
+
+        });
     </script>
 @endsection
