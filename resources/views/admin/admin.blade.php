@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
       <style>
       html,
       body {
@@ -104,43 +103,17 @@
         bottom: 100%;
     }
 
-    .ol-overviewmap-box {
-        top: 15%;
+    .ol-overviewmap-box{
+      top: 15%
     }
+    
     </style>
-    <div id="map" class="map">
-      <div id="popup" class="ol-popup">
+<div id="map" class="map" data-street-view=false data-street-view-expand=false>
+<div id="popup" class="ol-popup">
         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
         <div id="popup-content"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-4" id="msr">
-          <span class="input-group">
-            <label class="input-group-text" for="type">Geometry type:</label>
-            <select class="form-select" id="type">
-              <option value="Point">Point</option>
-              <option value="LineString">LineString</option>
-              <option value="Polygon">Polygon</option>
-              <option value="Circle">Circle</option>
-              <option value="None">None</option>
-            </select>
-            <input class="form-control" type="button" value="Undo" id="undo">
-          </span>
-        </div>
-      </div>
-      <form>
-      <label for="type">Measurement type &nbsp;</label>
-      <select id="type">
-        <option value="LineString">Length (LineString)</option>
-        <option value="Polygon">Area (Polygon)</option>
-      </select>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="segments">Show segment lengths:&nbsp;</label>
-      <input type="checkbox" id="segments" checked />
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <label for="clear">Clear previous measure:&nbsp;</label>
-      <input type="checkbox" id="clear" checked />
-    </form>
-    </div>    
+    </div>
+</div>
+     
   
 @endsection

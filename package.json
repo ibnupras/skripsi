@@ -8,20 +8,35 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "webgis:watch": "webpack --watch"
     },
     "devDependencies": {
+        "@babel/core": "^7.19.1",
+        "@babel/preset-env": "^7.19.1",
         "@popperjs/core": "^2.11.6",
+        "@webpack-cli/generators": "^0.1.9",
         "axios": "^0.25",
+        "babel-loader": "^8.2.5",
         "bootstrap": "^5.2.3",
+        "css-loader": "^6.7.1",
         "laravel-mix": "^6.0.6",
         "laravel-vite-plugin": "^0.7.8",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "sass": "^1.56.1",
-        "vite": "^4.3.9"
+        "sass-loader": "^13.1.0",
+        "style-loader": "^3.3.1",
+        "url-loader": "^4.1.1",
+        "vite": "^4.3.9",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.11.1"
     },
     "dependencies": {
-        "ol": "^7.4.0"
+        "dotenv": "^16.3.1",
+        "jquery": "^3.7.0",
+        "ol": "^7.4.0",
+        "ol-ext": "^4.0.10"
     }
 }

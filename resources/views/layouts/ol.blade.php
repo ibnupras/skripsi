@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 // poligon
 const raster = new ol.layer.Tile({
   source: new ol.source.OSM(),
@@ -326,7 +326,8 @@ const map = new ol.Map({
 //modify
 map.addInteraction(modify);
 
-const typeSelect = document.getElementById('type');
+const typeSelect = document.getElementById('measurementType');
+const measurementSelect = document.getElementById('geometryType');
 const showSegments = document.getElementById('segments');
 const clearPrevious = document.getElementById('clear');
 
@@ -374,13 +375,13 @@ typeSelect.onchange = function () {
 
 addInteraction();
 
-map.on('singleclick', function (evt) {
-  const coordinate = evt.coordinate;
-  const hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
+// map.on('singleclick', function (evt) {
+//   const coordinate = evt.coordinate;
+//   const hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
 
-  content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
-  overlay.setPosition(coordinate);
-});
+//   content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
+//   overlay.setPosition(coordinate);
+// });
 
 // console.log(ol.layerSwitcher)
 
@@ -398,4 +399,4 @@ map.addControl(new ol.control.LayerSwitcherImage())
 
 // Redraw layer when fonts are loaded
 $(window).on("load", function(){ console.log("loaded"); vector.changed(); });
-    </script>
+    </script> -->
