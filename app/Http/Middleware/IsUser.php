@@ -21,6 +21,7 @@ class IsUser
         if(Auth::user()->role_id == 2){
             return $next($request);
         }else{
+            dd("You don't have user access.");
             abort(403);
         }
     }

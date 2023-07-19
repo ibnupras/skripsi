@@ -20,10 +20,14 @@
 
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
   
-    <!-- OpenLayers CSS -->
-    <script src="{{ asset('css/ol.css') }}"></script>
-    <!-- OpenLayers JS -->
-    <script src="{{ asset('js/ol.js') }}"></script>
+    <!-- OpenLayers CSS & js -->
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
+
+
+     <!-- Ol-ext CSS&js -->
+     <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
 
 </head>
 <body>
@@ -95,5 +99,6 @@
             
         </main>
     </div>
+    @include('layouts.ol')
 </body>
 </html>
