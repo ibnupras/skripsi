@@ -1,46 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-      <style>
-      html,
-      body {
-        margin: 0;
-        height: 100%;
-      }
-
-      #map {
-        position: relative;
-        width: 100%;
-        height: 100vh;
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
     }
-    
-      .input-group{
+
+    #map {
       position: relative;
-      z-index: 1;
+      width: 100%;
+      height: 100vh;
     }
-
-      .map:-webkit-full-screen {
-        height: 100%;
-        margin: 0;
-    }
-      .map:fullscreen {
-        height: 100%;
-    }
-      .map .ol-rotate {
-        right: 3em;
-    }
-    #btn1:before {
-            content: '\f545';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-        }
-
-        #btn2:before {
-            content: '\f5ee';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-        }
-
+    /* .map-active{
+      width: 70%;
+      margin-left: 500px;
+    } */
+    
+/* popup */
     .ol-popup {
         position: absolute;
         background-color: white;
@@ -82,38 +60,409 @@
       .ol-popup-closer:after {
         content: "✖";
       }
-      .measure {
-        position: relative;
-        z-index: 1;
-        right: 0;
+
+
+/* for maptools group */
+    .maptools-wrapper {
+  background-color: white;
+  position: absolute;
+  height: 100%;
+  width: 45px;
+  z-index: 10;
+  right: 0;
+  overflow-y: overlay;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  /* custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    position: absolute;
+    right: -3rem;
+    top: -50rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 20px;
+    border: 6px solid transparent;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+  .maptools-group {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button[type="button"] {
+      width: 30px;
+      height: 30px;
+      background-color: white !important;
+
+      &:hover {
+        background-color: rgb(233, 233, 233) !important;
       }
-      #msr{
-        position: absolute;
-        z-index: 1;
-        bottom: 0;
-        right: 0;
-        size: 20px;
+
+      &::after {
+        content: attr(data-title);
+        position: fixed;
+        background-color: black;
+        color: white;
+        font-size: larger;
+        right: 50%;
+        bottom: 20px;
+        transform: translateX(50%);
+        padding: 5px 10px;
+        border-radius: 5px;
+        visibility: hidden;
       }
-      .ol-overviewmap,
-    .ol-overviewmap button {
-        top: 15% !important;
+
+      &:hover::after {
+        visibility: visible;
+      }
     }
 
-    .ol-overviewmap {
-        bottom: 100%;
+    &::after {
+      content: "";
+      width: calc(100% - 20px);
+      height: 1px;
+      background-color: rgb(139, 139, 139);
+      margin: 0 auto;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
+  }
+}
 
-    .ol-overviewmap-box{
-      top: 15%
-    }
+/* for base layerswitcher  */
+.baselayer-switcher {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    z-index: 2;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    background-position: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    border: 3px solid white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: white;
+}
+
+.baselayer-switcher span {
+    margin-bottom: 5px;
+    z-index: 0;
+}
+
+.baselayer-switcher .gradient {
+    width: 100%;
+    border-radius: 7px;
+    position: absolute;
+    height: 100%;
+    background: rgb(24, 24, 24);
+    background: linear-gradient(
+        0deg,
+        rgba(24, 24, 24, 1) 0%,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 212, 255, 0) 100%
+    );
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.baselayer-switcher .base-choice {
+    display: flex;
+    height: 100px;
+    bottom: -3px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+    position: absolute;
+    left: 105px;
+    gap: 20px;
+    padding: 0 15px;
+    transform: translateX(-5%);
+}
+
+.base-choice.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.2s ease-out;
+}
+
+.layer {
+    display: flex;
+    color: black;
+    margin: auto 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    cursor: pointer;
+    width: 60px;
+}
+
+.layer .layer-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background-position: center;
+}
+
+.layer:hover .layer-icon {
+    border: 2px solid #50a2f3;
+}
+
+.layer-icon.active {
+    border: 2px solid #50a2f3;
+}
+
+.layer .layer-name {
+    font-size: 10px;
+    word-wrap: break-word;
+    max-width: 60px;
+    margin: 0;
+    text-align: center;
+}
+
+.more.layer {
+    margin: 0;
+}
+
+.base-choice .more-layers-icon {
+    width: 55px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.base-choice .more-layers-icon i {
+    font-size: 28px;
+    color: black;
+}
+
+.mouse-box {
+    z-index: 3;
+    width: 105px;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* for more layer  */
+.more-layers-wrapper {
+    min-width: 240px;
+    height: auto;
+    position: absolute;
+    bottom: -3px;
+    left: -2px;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.more-layers-wrapper.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.more-layers-wrapper .box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 100%;
+    padding: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.more-layers-wrapper .box .flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
     
-    </style>
-<div id="map" class="map" data-street-view=false data-street-view-expand=false>
-<div id="popup" class="ol-popup">
-        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content"></div>
+/* sidebar */
+li {
+        list-style: none;
+        margin: 20px 0 20px 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 60vh;
+        position: fixed;
+        margin-left: -300px;
+        transition: 0.4s;
+        overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* Transition effect to slide in the sidebar */
+    z-index: 1;
+    }
+
+    .active-main-content {
+        margin-left: 250px;
+    }
+
+    .active-sidebar {
+        margin-left: 0;
+    }
+
+    #main-content {
+        transition: 0.4s;
+        display: flex;
+    }
+  </style>
+  <div id="map" class="map" data-street-view=false data-street-view-expand=false>
+  <div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+  </div>
+
+
+  <!-- maptools -->
+<div class="maptools-hide"></div>
+<div class="maptools-wrapper">
+    <div class="maptools-group">
+        <button id="info" data-title="Informasi Details" data-function-active=false type="button"><i class="fa fa-thumb-tack"></i></button>
+        <button type="button" class="text-dark back-to-extent" data-title="Back to Extent"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+        <button id="geolocation" data-title="Geolocation" type="button"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
     </div>
+    <div class="maptools-group">
+        <button id="distance" data-title="Distance Measurement" geomtype="LineString" type="button"></button>
+        <button id="area" data-title="Area Measurement" geomtype="Polygon" type="button" style="border-top: 0px !important;"></button>
+        <button id="clear" data-title="Clear Graphics" type="button" style="border-top: 0px !important;"></button>
+  </div>
 </div>
-     
   
+<!-- sidebar -->
+<div>
+          <div class="sidebar p-4 bg-primary" id="sidebar">
+            <h4 class="mb-5 text-white">layer</h4>
+            <li>
+              <button class="kantor">kantor</button>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-fire mr-2"></i>
+                Populer
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-newspaper mr-2"></i>
+                News
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-bicycle mr-2"></i>
+                Sports
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-boombox mr-2"></i>
+                Music
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-film mr-2"></i>
+                Film
+              </a>
+            </li>
+            <li>
+              <a class="text-white" href="#">
+                <i class="bi bi-bookmark mr-2"></i>
+                Bookmark
+              </a>
+            </li>
+          </div>
+        </div>
+        <section class="p-4 absolute" id="main-content">
+          <button class="btn btn-primary" id="button-toggle">
+            <i class="bi bi-list"></i>
+          </button>
+          </div>
+        </section>
+
+<!-- layerswicher -->
+</div>
+
+        <div class="baselayer-switcher">
+            <div class="gradient"></div>
+            <span class="baselayers-title">Bases</span>
+            <div class="mouse-box"></div>
+
+            <div class="base-choice">
+                <div class="more-layers-icon">
+                    <i class="bi bi-stack"></i>
+                    <span class="layer-name">More</span>
+                </div>
+            </div>
+
+            <div class="more-layers-wrapper">
+                <div class="box">
+                    <div class="flex">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup-grid" class="ol-popup popup-grid m-0 p-0 d-none" style="height: 300px;">
+        <div class="popup-header border-bottom" style="height: 25px; background-color: #006aca; border-radius: 10px 10px 0 0">
+            <a href="#" id="popup-closer-grid" class="ol-popup-closer" style="color: white;"></a>
+        </div>
+        <div id="popup-select-grid" class="mh-100 px-0 overflow-auto scrollbar" style="height: 275px; border-radius: 0 0 20px 20px;">
+            <table class="table table-striped">
+                <tbody id="list-poi-select">
+                    <!-- dom from javascript to append list poi -->
+                </tbody>
+            </table>
+        </div>
+</div>
+
+<script>
+    // event will be executed when the toggle-button is clicked
+    document.getElementById("button-toggle").addEventListener("click", () => {
+
+        // when the button-toggle is clicked, it will add/remove the active-sidebar class
+        document.getElementById("sidebar").classList.toggle("active-sidebar");
+        
+        // when the button-toggle is clicked, it will add/remove the active-main-content class
+        document.getElementById("main-content").classList.toggle("active-main-content");
+        
+        // when the button-toggle is clicked, it will add/remove the active-main-content class
+        document.getElementById("map").classList.toggle("map-active");
+
+    });
+</script>
 @endsection

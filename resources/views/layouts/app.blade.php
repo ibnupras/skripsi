@@ -13,22 +13,29 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    
+
     <!-- Scripts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
-  
+    
+    <link rel="stylesheet" src="{{ asset('./map.css')}}">
+    <link rel="stylesheet" src="{{ asset('./style.css')}}">
+
     <!-- OpenLayers CSS & js -->
-    <!-- <script src="{{ asset('webgis/js/dists/map.bundle.js')}}"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
 
+    
 
-     <!-- Ol-ext CSS&js -->
-     <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" /> -->
-<!-- <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script> -->
+
+
 
 </head>
 <body>
@@ -50,6 +57,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        
                         <!-- Authentication Links -->
                         @guest
                             
@@ -93,14 +101,14 @@
                    
                 </div>
             </div>
-        </nav>
-
+        </nav>      
         <main class="pb-4">
         @yield('content')
     <script src="{{ asset('webgis/js/dists/map.bundle.js')}}"></script>
             
         </main>
     </div>
+    
     @include('layouts.ol')
 </body>
 </html>

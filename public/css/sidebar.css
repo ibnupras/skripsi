@@ -1,0 +1,190 @@
+.leftbar {
+    width: 108px;
+    height: 100vh;
+    background-color: #F6F7FC;
+    border-right: 1px solid #DDDEE280;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.leftbar .logo {
+    width: 58px;
+    height: 58px;
+    background-color: #F6F7FC;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map {
+    width: 100%;
+    height: 100vh;
+}
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 84px;
+    z-index: 2;
+    background-color: white;
+    width: 317px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: margin ease-in-out 0.5s;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+    margin-bottom: 67.82px;
+    margin-top: 45px;
+    width: 200px;
+}
+
+.profile svg {
+    position: absolute;
+    top: 50%;
+    left: -33.7px;
+    transform: translateY(-43.5%);
+    z-index: -1;
+}
+
+.profile-photo {
+    overflow: hidden;
+    border-radius: 50%;
+    width: 53.37px;
+    height: 53.37px;
+}
+
+.profile-photo img {
+    width: 53.37px;
+}
+
+.profile-desc h3 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    margin: 0;
+    color: black;
+}
+
+.profile-desc span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #000000;
+    opacity: 0.3;
+}
+
+.it .it-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+}
+
+.it {
+    display: flex;
+    justify-content: space-between;
+    width: 245px;
+    align-items: center;
+    margin: 16.5px 0;
+}
+
+.it-content span.it-icon {
+    width: 53px;
+    height: 53px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.it-content span.it-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+    opacity: 0.5;
+}
+
+.arrow-btn {
+    width: 53px;
+    height: 53px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fefeff;
+    box-shadow: 0px 100px 80px rgba(41, 72, 152, 0.05),
+        0px 64.8148px 46.8519px rgba(41, 72, 152, 0.037963),
+        0px 38.5185px 25.4815px rgba(41, 72, 152, 0.0303704),
+        0px 20px 13px rgba(41, 72, 152, 0.025),
+        0px 8.14815px 6.51852px rgba(41, 72, 152, 0.0196296),
+        0px 1.85185px 3.14815px rgba(41, 72, 152, 0.012037);
+    border-radius: 18px;
+}
+
+.hamburger {
+    position: absolute;
+    width: 54.28px;
+    height: 52px;
+    top: 45px;
+    left: 460px;
+    background: #4461f2;
+    box-shadow: 0px 15px 20px rgba(98, 60, 231, 0.35);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+    transition: margin ease-in-out 0.5s;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    display: block;
+    height: 2px;
+    width: 25px;
+    background-color: white;
+}
+
+.collapsed {
+    margin-left: -320px;
+}
+
+.expanded {
+    margin: 0;
+}
+
+.li-custom li {
+    border: 0px;
+    padding-left: 40px;
+}
+
+.item {
+    overflow: hidden;
+    height: 95px;
+    transition: height 0.2s ease-in-out;
+}
+
+.arrow {
+    transition: all 0.2s ease-in-out;
+}
+
+.arrow-expanded {
+    transform: rotate(90deg);
+}

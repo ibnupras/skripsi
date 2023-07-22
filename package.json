@@ -34,9 +34,13 @@
         "webpack-dev-server": "^4.11.1"
     },
     "dependencies": {
+        "bootstrap-select": "^1.13.18",
         "dotenv": "^16.3.1",
+        "ion-rangeslider": "^2.3.1",
         "jquery": "^3.7.0",
         "ol": "^7.4.0",
-        "ol-ext": "^4.0.10"
+        "ol-ext": "^4.0.10",
+        "ol-street-view": "^2.0.3",
+        "webpack-jquery-ui": "^2.0.1"
     }
 }

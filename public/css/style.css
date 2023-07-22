@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+span.brightness-icon {
+}
+
+.item-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+ul.reset,
+ul.reset li,
+ul.reset ul li {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+}
+
+input,
+button,
+submit {
+    border: none;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100vw;
+}

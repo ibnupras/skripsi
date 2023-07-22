@@ -1,3 +1,14 @@
 import "./map";
 import(/* webpackChunkName: "baseLayers" */ "./baseLayers");
 import(/* webpackChunkName: "baseLayerSwitcher" */ "./baseLayerSwitcher");
+import(/* webpackChunkName: "measure" */ "./measure");
+import(/* webpackChunkName: "geoLocation" */ "./geoLocation");
+import(/* webpackChunkName: "scale" */ "./scale");
+import(/* webpackChunkName: "infodetail" */ "./infodetail");
+import(/* webpackChunkName: "gridAnalysis" */ "./gridAnalysis");
+import(/* webpackChunkName: "panelAnalysis" */ "./panelAnalysis");
+import(/* webpackChunkName: "buttondraw" */ "./buttondraw");
+import(/* webpackChunkName: "drawing" */ "./drawing");
+import(/* webpackChunkName: "Circle Analysis" */ "./circleanalysis");
+import(/* webpackChunkName: "addpois" */ "./addpois");
+import(/* webpackChunkName: "streetview" */ "./streetview");
