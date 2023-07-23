@@ -356,9 +356,9 @@ li {
         <button id="geolocation" data-title="Geolocation" type="button"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
     </div>
     <div class="maptools-group">
-        <button id="distance" data-title="Distance Measurement" geomtype="LineString" type="button"></button>
-        <button id="area" data-title="Area Measurement" geomtype="Polygon" type="button" style="border-top: 0px !important;"></button>
-        <button id="clear" data-title="Clear Graphics" type="button" style="border-top: 0px !important;"></button>
+        <button id="distance" data-title="Distance Measurement" geomtype="LineString" type="button"><i class="fa fa-magic" aria-hidden="true"></i></button>
+        <button id="area" data-title="Area Measurement" geomtype="Polygon" type="button" style="border-top: 0px !important;"><i class="fa fa-object-ungroup" aria-hidden="true"></i></button>
+        <button id="clear" data-title="Clear Graphics" type="button" style="border-top: 0px !important;"><i class="fa fa-eraser" aria-hidden="true"></i></button>
   </div>
 </div>
   
