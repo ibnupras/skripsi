@@ -88,6 +88,7 @@
         </main>
     </div>
 
+    @yield('script')
     @include('layouts.ol')
 </body>
 </html>

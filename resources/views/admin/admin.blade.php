@@ -465,3 +465,16 @@ li {
     });
 </script>
 @endsection
+@section('script')
+    <script>
+        $('body').mouseover(function () {
+            if ($(this).hasClass('ol-street-view--activated')) {
+                $('#main-content, #map .maptools-wrapper').hide()
+                $('#map').attr('style', 'width: 300px !important;height: 250px !important;')
+            } else {
+                $('#main-content, #map .maptools-wrapper').show()
+                $('#map').removeAttr('style')
+            }
+        });
+    </script>
+@endsection
