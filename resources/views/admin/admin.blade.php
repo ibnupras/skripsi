@@ -11,13 +11,24 @@
     #map {
       position: relative;
       width: 100%;
-      height: 100vh;
+      height: 87.6vh;
+    }
+
+    #ol-street-view--pegman-button-div {
+      top: unset;
+      bottom: 10px;
+      right: 60px
     }
     /* .map-active{
       width: 70%;
       margin-left: 500px;
     } */
+.btn-primary{
+  --bs-btn-bg: #097615;
+  --bs-btn-border-color: #097615;
+}
 
+    
 /* popup */
     .ol-popup {
         position: absolute;
@@ -60,6 +71,13 @@
       .ol-popup-closer:after {
         content: "✖";
       }
+      .info-marker {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background-color: red;
+    }
 
 
 /* for maptools group */
@@ -317,7 +335,7 @@ li {
     }
 
     .sidebar {
-        width: 250px;
+        width: px;
         height: 60vh;
         position: fixed;
         margin-left: -300px;
@@ -335,11 +353,20 @@ li {
         margin-left: 0;
     }
 
+    .bg-primary {
+        background-color: #097615 !important;
+    }
+
+
     #main-content {
         transition: 0.4s;
         display: flex;
     }
+    #ol-street-view--map-container {
+      position: unset;
+    }
   </style>
+
   <div id="map" class="map" data-street-view=false data-street-view-expand=false>
   <div id="popup" class="ol-popup">
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
@@ -351,14 +378,14 @@ li {
     <div class="maptools-hide"></div>
     <div class="maptools-wrapper">
         <div class="maptools-group">
-            <button class="btn btn-primary px-3 rounded-0" id="info" data-title="Informasi Details" data-function-active=false type="button"><i class="fa fa-thumb-tack"></i></button>
-            <button class="btn btn-primary px-3 rounded-0" type="button" data-title="Back to Extent"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
-            <button class="btn btn-primary px-3 rounded-0" id="geolocation" data-title="Geolocation" type="button"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="info" title="Informasi Detail" data-function-active=false type="button"><i class="fa fa-thumb-tack"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="addinformation" title="Tambah Point" type="button"><i class="fa fa-list-alt" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="geolocation" title="Lokasi Terkini" type="button"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
         </div>
         <div class="maptools-group">
-            <button class="btn btn-primary px-3 rounded-0" id="distance" data-title="Distance Measurement" geomtype="LineString" type="button"><i class="fa fa-magic" aria-hidden="true"></i></button>
-            <button class="btn btn-primary px-3 rounded-0" id="area" data-title="Area Measurement" geomtype="Polygon" type="button" style="border-top: 0px !important;"><i class="fa fa-object-ungroup" aria-hidden="true"></i></button>
-            <button class="btn btn-primary px-3 rounded-0" id="clear" data-title="Clear Graphics" type="button" style="border-top: 0px !important;"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="distance" title="Pengukuran Jarak" geomtype="LineString" type="button"><i class="fa fa-magic" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="area" title="Pengukuran Area" geomtype="Polygon" type="button" style="border-top: 0px !important;"><i class="fa fa-object-ungroup" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="clear" title="Hapus Pengukuran" type="button" style="border-top: 0px !important;"><i class="fa fa-eraser" aria-hidden="true"></i></button>
     </div>
     </div>
 
@@ -367,48 +394,21 @@ li {
         <div class="sidebar p-4 bg-primary" id="sidebar">
             <h4 class="mb-5 text-white">layer</h4>
             <li>
-              <button class="btn btn-light kantor fw-bold">Kantor</button>
+              <button class="btn btn-light kantor fw-bold" title="Kantor Cabang">KC</button>
             </li>
             <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-fire mr-2"></i>
-                Populer
-              </a>
+            <button class="btn btn-light kcp fw-bold" title="Kantor Cabang Pembantu">KCP</button>
             </li>
             <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-newspaper mr-2"></i>
-                News
-              </a>
+            <button class="btn btn-light kfo fw-bold" title="Kantor Fungsional Operational">KFO</button>
             </li>
             <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-bicycle mr-2"></i>
-                Sports
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-boombox mr-2"></i>
-                Music
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-film mr-2"></i>
-                Film
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-bookmark mr-2"></i>
-                Bookmark
-              </a>
+            <button class="btn btn-light atm fw-bold" title="Anjungan Tunai Mandiri">ATM</button>
             </li>
           </div>
         </div>
-        <section class="p-4 absolute" id="main-content">
-            <button class="btn btn-primary" style="z-index: 2"  id="button-toggle">
+        <section class="p-4 position-absolute" style="z-index: 1;" id="main-content">
+            <button class="btn btn-primary" id="button-toggle">
                 <i class="bi bi-list"></i>
             </button>
         </section>
@@ -470,10 +470,14 @@ li {
         $('body').mouseover(function () {
             if ($(this).hasClass('ol-street-view--activated')) {
                 $('#main-content, #map .maptools-wrapper').hide()
-                $('#map').attr('style', 'width: 300px !important;height: 250px !important;')
-            } else {
+                $('#map').attr('style', 'width: 200px !important;height: 200px !important; position: absolute');
+                $('#ol-street-view--map-container').attr('style', 'position:absolute');
+                $('.baselayer-switcher').css('display', 'none')
+              } else {
                 $('#main-content, #map .maptools-wrapper').show()
+                $('#ol-street-view--map-container').attr('style', 'position:unset');
                 $('#map').removeAttr('style')
+                $('.baselayer-switcher').css('display', 'block')
             }
         });
     </script>

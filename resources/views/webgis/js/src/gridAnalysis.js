@@ -19,7 +19,7 @@ import {
 } from './circleanalysis';
 import WKT from 'ol/format/WKT';
 import GeoJSON from 'ol/format/GeoJSON';
-import { kriterias } from './panelAnalysis';
+
 
 // // Define projection extent
 register(proj4);

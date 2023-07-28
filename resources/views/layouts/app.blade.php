@@ -36,8 +36,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ auth()->check() && auth()->user()->role_id == 1 ? route('admin') : (auth()->check() && auth()->user()->role_id == 2 ? route('user') : '#') }}">
-                    BSI GIS
+                <a class="navbar-brand" style="z-index:1" href="{{ auth()->check() && auth()->user()->role_id == 1 ? route('admin') : (auth()->check() && auth()->user()->role_id == 2 ? route('user') : '#') }}">
+                <img src="{{ asset('icon/logo.png')}}" alt="Logo" style="height: 40px; margin-right: 10px;">    
+                BSI GIS(Geospasial Information System)
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -52,12 +53,12 @@
                         @else
                         @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('survey') }}">{{ __('survey') }}</a>
+                                <a class="nav-link" href="{{ route('survey') }}">Survey</a>
                             </li>
                         @endif
                         @if(auth()->check() && auth()->user()->role_id == 1 && Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">Tambah Akun</a>
                             </li>
                         @endif
                         <li class="nav-item dropdown">
@@ -82,7 +83,7 @@
                 </div>
             </div>
         </nav>
-        <main class="pb-4">
+        <main class="">
             @yield('content')
             <script src="{{ asset('webgis/js/dists/map.bundle.js')}}"></script>
         </main>

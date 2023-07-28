@@ -15,7 +15,7 @@ export const overlay = new Overlay({
 
 const map = new Map({
   view: new View({
-    center: fromLonLat([118.0148634, -2.548926]),
+    center: fromLonLat([119.4360, -5.1477]),
     zoom: 5.8,
     maxZoom: 20,
     minZoom: 4,
