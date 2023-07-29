@@ -7,4 +7,5 @@
                         @elseif (auth()->user()->role_id == 2)
                             <script>window.location.href = "{{ route('user') }}";</script>
                         @endif
+@endif
 @endsection

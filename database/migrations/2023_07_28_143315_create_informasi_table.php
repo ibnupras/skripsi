@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('informasi', function (Blueprint $table) {
             $table->id();
+            $table->string('judul');
+            $table->string('deskripsi');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }
