@@ -9,6 +9,33 @@ import Icon from 'ol/style/Icon';
 import Point from 'ol/geom/Point';
 import Feature from 'ol/Feature';
 import map from "./map";
+import jQuery from 'jquery';
+
+fetch('http://127.0.0.1:8000/api/informasi', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+      },
+    })
+      .then((response) => response.json())
+      .then(({data}) => {
+        data.forEach((item) => {
+          const infoPoint = new Feature({
+            geometry: new Point(fromLonLat([item.longitude, item.latitude])),
+          });
+          infoPoint.setProperties({
+            id: item.id,
+            judul: item.judul,
+            deskripsi: item.deskripsi,
+          });
+          infoLayer.getSource().addFeature(infoPoint);
+
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
 
 const infoLayer = new layerVector({
     source: new sourceVector(),
@@ -48,7 +75,7 @@ const infoLayer = new layerVector({
       const content = `<div class="popup-container" id="popups-container">
         <div class="card">
           <div class="card-body">
-            <span class="popup-close cancel" id="cancel">&times;</span>
+            <span class="popup-close cancel" id="close">&times;</span>
             <form>
               <div class="form-group">
                 <label for="judul">Judul:</label>
@@ -86,7 +113,7 @@ const infoLayer = new layerVector({
       longitude: longitude,
     };
   
-    fetch('/api/simpan-informasi', {
+    fetch('http://127.0.0.1:8000/api/simpan-informasi', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -101,6 +128,7 @@ const infoLayer = new layerVector({
           geometry: new Point(fromLonLat([longitude, latitude])),
         });
         infoPoint.setProperties({
+          id: data.id,
           judul: judul,
           deskripsi: deskripsi,
         });
@@ -115,17 +143,9 @@ const infoLayer = new layerVector({
     map.getOverlays().clear();
   }
   
-  function cancelInfoPoint() {
-    deactivateInfoMode();
-    map.getOverlays().clear();
-  }
+
+
   
-  function removeInfoPoint() {
-    if (selectedFeature) {
-      infoLayer.getSource().removeFeature(selectedFeature);
-      map.getOverlays().clear();
-    }
-  }
   
   map.on('click', function (event) {
     const coordinate = toLonLat(event.coordinate);
@@ -142,13 +162,14 @@ const infoLayer = new layerVector({
         const judul = feature.get('judul');
         const deskripsi = feature.get('deskripsi');
   
-        const content = `<div class="popup-container">
+        const content = `<div class="popup-container" id="popup-hasil">
           <div class="card">
             <div class="card-body">
-              <span class="popup-close" onclick="removeInfoPoint()">&times;</span>
+              <span class="popup-close" data-id="${feature.get('id')}" >&times;</span>
               <p><strong>${judul}</strong></p>
               <p>${deskripsi}</p>
-            </div>
+              <button type="button" class="btn btn-danger" id="">Hapus</button>
+              </div>
             </div>
             </div>`;
         
@@ -169,17 +190,52 @@ const infoLayer = new layerVector({
     document.getElementById('addinformation').addEventListener('click', function () {
           activateInfoMode();
         });
-  document.getElementById('addinformation').addEventListener('click', function () {
-    activateInfoMode()
+
+  // document.getElementById('popup-container').addEventListener('click', function (event) {
+  //   const target = event.target;
+  //   if (target.id === 'addinformation') {
+  //     activateInfoMode();
+  //   } else if (target.id === 'save') {
+  //     saveInfoPoint();
+  //     console.log('save');
+  //   } else if (target.id === 'close') {
+  //     cancelInfoPoint();
+  //   }
+  // });
+
+  $(document).on('click', '#popup-hasil .popup-close', function () {
+ console.log(infoLayer);
+ deactivateInfoMode();
+ map.getOverlays().clear();
   });
 
-  document.getElementById('popup-container').addEventListener('click', function (event) {
-    const target = event.target;
-    if (target.id === 'addinformation') {
-      activateInfoMode();
-    } else if (target.id === 'save') {
-      saveInfoPoint();
-    } else if (target.id === 'cancel') {
-      cancelInfoPoint();
+  $(document).on('click', '#popup-hasil button', function () {
+    if (selectedFeature) {
+      const id = selectedFeature.get('id');
+      console.log(id);
+      infoLayer.getSource().removeFeature(selectedFeature);
+      map.getOverlays().clear();
+    
+      fetch('http://127.0.0.1:8000/api/hapus-informasi', {
+      method: 'delete',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+      },
+      body: JSON.stringify({id: id}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    
     }
-  });
+     });
+  // document.getElementById('popup-hasil').addEventListener('click', function (event) {
+  //   const target = event.target;
+  //   if (target.id === 'cancel') {
+  //     removeInfoPoint();
+  //   }
+  // });

@@ -16,6 +16,8 @@ use App\Http\Controllers\InformasiController;
 */
 
 Route::post('/simpan-informasi', 'App\Http\Controllers\InformasiController@simpanInformasi');
+Route::GET('/informasi', 'App\Http\Controllers\InformasiController@getInformasi');
+Route::delete('/hapus-informasi', 'App\Http\Controllers\InformasiController@hapusInformasi');
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
