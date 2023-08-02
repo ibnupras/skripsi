@@ -43,10 +43,10 @@
                             <div id="listImage">
                                 
                             </div>
-                            <a href="#" class="btn btn-primary" onclick="TambahGambar()">Tambah</a>
+                            <a href="#" class="btn btn-secondary" onclick="TambahGambar()">Tambah</a>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                            <div class="form-group d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary ">{{ __('Submit') }}</button>
                             </div>
                         </form>
                     </div>

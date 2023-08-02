@@ -38,7 +38,7 @@
             <div class="container">
                 <a class="navbar-brand" style="z-index:1" href="{{ auth()->check() && auth()->user()->role_id == 1 ? route('admin') : (auth()->check() && auth()->user()->role_id == 2 ? route('user') : '#') }}">
                 <img src="{{ asset('icon/logo.png')}}" alt="Logo" style="height: 40px; margin-right: 10px;">    
-                BSI GIS(Geospasial Information System)
+                BSI GIS(Geographic Information System)
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
