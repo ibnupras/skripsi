@@ -31,10 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/survey/delete/{id}', [SurveyController::class, 'delete'])->name('survey.delete');
 
     Route::group(['middleware' => ['isAdmin']], function () {
-
         route::get('admin/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
-        
-
     });
 
 
