@@ -392,7 +392,7 @@
     <!-- sidebar -->
     <div>
         <div class="sidebar p-4 bg-primary" id="sidebar">
-            <h4 class="mb-5 text-white">layer</h4>
+            <h4 class="mb-5 text-white">Layer</h4>
             <li>
               <button class="btn btn-light kantor fw-bold" title="Kantor Cabang">KC</button>
             </li>

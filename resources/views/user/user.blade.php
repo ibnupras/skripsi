@@ -71,6 +71,13 @@
       .ol-popup-closer:after {
         content: "✖";
       }
+      .info-marker {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background-color: red;
+    }
 
 
 /* for maptools group */
@@ -372,7 +379,7 @@ li {
     <div class="maptools-wrapper">
         <div class="maptools-group">
             <button class="btn btn-primary px-3 rounded-0" id="info" title="Informasi Detail" data-function-active=false type="button"><i class="fa fa-thumb-tack"></i></button>
-            <button class="btn btn-primary px-3 rounded-0" type="button" title="Kembali ke Semula"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>
+            <button class="btn btn-primary px-3 rounded-0" id="addinformation" title="Tambah Point" type="button"><i class="fa fa-list-alt" aria-hidden="true"></i></button>
             <button class="btn btn-primary px-3 rounded-0" id="geolocation" title="Lokasi Terkini" type="button"><i class="fa fa-location-arrow" aria-hidden="true"></i></button>
         </div>
         <div class="maptools-group">
@@ -385,7 +392,7 @@ li {
     <!-- sidebar -->
     <div>
         <div class="sidebar p-4 bg-primary" id="sidebar">
-            <h4 class="mb-5 text-white">layer</h4>
+            <h4 class="mb-5 text-white">Layer</h4>
             <li>
               <button class="btn btn-light kantor fw-bold" title="Kantor Cabang">KC</button>
             </li>
