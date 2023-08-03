@@ -17,6 +17,30 @@ return new class extends Migration
         Schema::table('kantor', function (Blueprint $table) {
             $table->point('geom', 'GEOMETRY', 4326);
         });
+        Schema::create('atmmakassar', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('alamat')->nullable();
+            $table->string('jenis')->nullable();
+            $table->point('geom', 'GEOMETRY', 4326);
+            $table->timestamps();
+        });
+        Schema::create('kcpmakassar', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('alamat')->nullable();
+            $table->string('jenis')->nullable();
+            $table->point('geom', 'GEOMETRY', 4326);
+            $table->timestamps();
+        });
+        Schema::create('kfomakassar', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('alamat')->nullable();
+            $table->string('jenis')->nullable();
+            $table->point('geom', 'GEOMETRY', 4326);
+            $table->timestamps();
+        });
     }
 
     /**

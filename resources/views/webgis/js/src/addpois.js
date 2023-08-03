@@ -10,7 +10,6 @@ function addNewImageLayer(url, layerName) {
             url: url,
             params: {
                 LAYERS: layerName,
-                CQL_FILTER: filterExpression,
             },
         }),
     });
@@ -20,23 +19,23 @@ function addNewImageLayer(url, layerName) {
 
 // Create and add initial layer 'ne:kantor'
 const layerKantor = addNewImageLayer(
-    "http://localhost:8080/geoserver/ne/wms",
-    "ne:kantor_kc"
+    "http://localhost:7070/geoserver/ne/wms",
+    "ne:kantor"
 );
 
 // // Additional Image Layers (ne:atm, ne:kcp, ne:kfo)
-// const layerATM = addNewImageLayer(
-//     "http://localhost:7070/geoserver/ne/wms",
-//     "ne:atmmakassar"
-// );
-// const layerKCP = addNewImageLayer(
-//     "http://localhost:7070/geoserver/ne/wms",
-//     "ne:kcpmakassar"
-// );
-// const layerKFO = addNewImageLayer(
-//     "http://localhost:7070/geoserver/ne/wms",
-//     "ne:kfomakassar"
-// );
+const layerATM = addNewImageLayer(
+    "http://localhost:7070/geoserver/ne/wms",
+    "ne:atmmakassar"
+);
+const layerKCP = addNewImageLayer(
+    "http://localhost:7070/geoserver/ne/wms",
+    "ne:kcpmakassar"
+);
+const layerKFO = addNewImageLayer(
+    "http://localhost:7070/geoserver/ne/wms",
+    "ne:kfomakassar"
+);
 
 // Function to toggle the visibility of an Image Layer
 function toggleLayerVisibility(layer) {

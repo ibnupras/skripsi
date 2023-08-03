@@ -35,6 +35,7 @@
                             <div class="form-group mb-3">
                                 <label for="jenis">Jenis Outlet</label>
                                 <select class="form-select" required id="jenis" name="jenis">
+                                    <option value=""></option>
                                     <option value="KC">KC</option>
                                     <option value="KCP">KCP</option>
                                     <option value="KFO">KFO</option>

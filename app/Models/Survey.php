@@ -9,12 +9,13 @@ class Survey extends Model
 {
     use HasFactory;
 
-protected $fillable = [
-    'user_id',
-    'deskription',
-    'title',
-    'location',
-];
+    protected $fillable = [
+        'user_id',
+        'deskription',
+        'title',
+        'location',
+    ];
+    
     public function images()
     {
         return $this->hasMany(SurveyImage::class);
