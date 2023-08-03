@@ -7,14 +7,20 @@ use App\Models\KFOMakassar;
 use App\Models\ATMMakassar;
 use App\Models\KCPMakassar;
 use Illuminate\Http\Request;
-// use MStaack\LaravelPostgis\Eloquent\PostgisTrait;
 use MStaack\LaravelPostgis\Geometries\Point;
 
-class TambahKantorController extends Controller
+class KantorController extends Controller
 {
-    public function index()
+    public function index(){
+        return view('admin.kantor');
+    }
+    public function getKantor(Request $request){
+        $data = Kantor::where('jenis', $request->jenis)->get();
+        return response()->json(['message' => 'Berhasil mengambil data', 'data'=>$data], 200);
+    }
+    public function create()
     {
-        return view('tambahkantor');
+        return view('admin.kantor-tambah');
     }
     public function store(Request $request)
     {

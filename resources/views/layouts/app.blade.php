@@ -53,7 +53,7 @@
                         @else
                         @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tambahkantor') }}">Tambah Kantor</a>
+                                <a class="nav-link" href="{{ route('kantor.index') }}">Kantor</a>
                             </li>
                         @endif
                         @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))

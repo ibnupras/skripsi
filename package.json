@@ -15,7 +15,7 @@
         "@babel/core": "^7.19.1",
         "@babel/preset-env": "^7.19.1",
         "@popperjs/core": "^2.11.6",
-        "@webpack-cli/generators": "^0.1.9",
+        "@webpack-cli/generators": "^3.0.7",
         "axios": "^0.25",
         "babel-loader": "^8.2.5",
         "bootstrap": "^5.2.3",

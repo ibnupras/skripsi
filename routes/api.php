@@ -17,6 +17,7 @@ use App\Http\Controllers\InformasiController;
 
 Route::post('/simpan-informasi', 'App\Http\Controllers\InformasiController@simpanInformasi');
 Route::GET('/informasi', 'App\Http\Controllers\InformasiController@getInformasi');
+Route::get('/kantor', 'App\Http\Controllers\KantorController@getKantor');
 Route::delete('/hapus-informasi', 'App\Http\Controllers\InformasiController@hapusInformasi');
 
 
