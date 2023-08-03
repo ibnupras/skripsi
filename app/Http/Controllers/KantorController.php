@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kantor;
-use App\Models\KFOMakassar;
-use App\Models\ATMMakassar;
-use App\Models\KCPMakassar;
 use Illuminate\Http\Request;
 use MStaack\LaravelPostgis\Geometries\Point;
 
