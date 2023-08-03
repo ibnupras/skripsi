@@ -30,11 +30,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
     Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');
     Route::get('/survey/delete/{id}', [SurveyController::class, 'delete'])->name('survey.delete');
-    Route::get('/kantor', [KantorController::class, 'index'])->name('kantor.index');
-    Route::get('/kantor/tambah', [KantorController::class, 'create'])->name('kantor.tambah');
-    Route::post('/kantor/store', [KantorController::class, 'store'])->name('kantor.store');
     Route::group(['middleware' => ['isAdmin']], function () {
         route::get('admin/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
+
+        Route::get('/kantor', [KantorController::class, 'index'])->name('kantor.index');
+        Route::post('/kantor/store', [KantorController::class, 'store'])->name('kantor.store');
+        Route::get('/kantor/tambah', [KantorController::class, 'create'])->name('kantor.tambah');
+        Route::get('/kantor/edit/{id}', [KantorController::class, 'edit'])->name('kantor.edit');
+        Route::get('/kantor/hapus/{id}', [KantorController::class, 'delete'])->name('kantor.delete');
+        Route::post('/kantor/update/{id}', [KantorController::class, 'update'])->name('kantor.update');
     });
 
 

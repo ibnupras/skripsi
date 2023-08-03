@@ -31,6 +31,9 @@
     <!-- OpenLayers CSS & js -->
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -51,7 +54,7 @@
                         @guest
 
                         @else
-                        @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))
+                        @if((auth()->user()->role_id == 1))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('kantor.index') }}">Kantor</a>
                             </li>

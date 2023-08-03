@@ -18,37 +18,37 @@
         <div class="row justify-content-center mt-4">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Form Tambah Kantor</div>
+                    <div class="card-header">Form Edit Kantor</div>
                     <div class="card-body">
-                        <form action="{{ route('kantor.store') }}" method="POST" target="_blank">
+                        <form action="{{ route('kantor.update', ['id' => $kantor->id]) }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Outlet</label>
-                                <input id="nama" type="text" class="form-control" name="nama" required autofocus>
+                                <input id="nama" type="text" class="form-control" name="nama" required autofocus value="{{ $kantor->nama }}">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="alamat">Alamat</label>
-                                <textarea name="alamat" id="alamat" class="form-control" rows="2"></textarea>
+                                <textarea name="alamat" id="alamat" class="form-control" rows="2">{{ $kantor->alamat }}</textarea>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="jenis">Jenis Outlet</label>
                                 <select class="form-select" required id="jenis" name="jenis">
                                     <option value=""></option>
-                                    <option value="KC">KC</option>
-                                    <option value="KCP">KCP</option>
-                                    <option value="KFO">KFO</option>
-                                    <option value="ATM">ATM</option>
+                                    <option {{ 'KC' == $kantor->jenis ? 'selected' : '' }} value="KC">KC</option>
+                                    <option {{ 'KCP' == $kantor->jenis ? 'selected' : '' }} value="KCP">KCP</option>
+                                    <option {{ 'KFO' == $kantor->jenis ? 'selected' : '' }} value="KFO">KFO</option>
+                                    <option {{ 'ATM' == $kantor->jenis ? 'selected' : '' }} value="ATM">ATM</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="latitude">Latitude</label>
-                                <input id="latitude" type="text" class="form-control" name="latitude" required autocomplete="off">
+                                <input id="latitude" type="text" class="form-control" name="latitude" required autocomplete="off" value="{{ $kantor->geom->getLat() }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="longitude">Longitude</label>
-                                <input id="longitude" type="text" class="form-control" name="longitude" required autocomplete="off">
+                                <input id="longitude" type="text" class="form-control" name="longitude" required autocomplete="off" value="{{ $kantor->geom->getLng() }}">
                             </div>
 
 
