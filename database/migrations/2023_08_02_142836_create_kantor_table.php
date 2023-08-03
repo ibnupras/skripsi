@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat')->nullable();
-            $table->geometry('geom ')->nullable();
             $table->string('jenis')->nullable();
             $table->timestamps();
         });

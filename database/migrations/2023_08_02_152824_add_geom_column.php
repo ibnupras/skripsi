@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+// use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use MStaack\LaravelPostgis\Schema\Blueprint;
 
 return new class extends Migration
 {
@@ -13,9 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kfomakassar', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('kantor', function (Blueprint $table) {
+            $table->point('geom', 'GEOMETRY', 4326);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kfomakassar');
+        
     }
 };

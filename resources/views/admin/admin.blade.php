@@ -346,7 +346,7 @@
     }
 
     .active-main-content {
-        margin-left: 250px;
+        margin-left: 105px;
     }
 
     .active-sidebar {

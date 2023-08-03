@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\TambahKantorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
     Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');
     Route::get('/survey/delete/{id}', [SurveyController::class, 'delete'])->name('survey.delete');
-
+    Route::get('/tambahkantor', [TambahKantorController::class, 'index'])->name('tambahkantor');
+    Route::post('/tambahkantor', [TambahKantorController::class, 'store'])->name('tambahkantor.store');
     Route::group(['middleware' => ['isAdmin']], function () {
         route::get('admin/admin',[App\Http\Controllers\HomeController::class,'admin'])->name('admin');
     });

@@ -41,7 +41,7 @@
 
                             <div class="image-form">
                             <div id="listImage">
-                                
+
                             </div>
                             <a href="#" class="btn btn-secondary" onclick="TambahGambar()">Tambah</a>
 
@@ -60,7 +60,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Hasil Survey') }}</div>       
+                    <div class="card-header">{{ __('Hasil Survey') }}</div>
             <table>
                     <thead>
         <tr>

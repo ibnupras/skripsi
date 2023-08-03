@@ -37,7 +37,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" style="z-index:1" href="{{ auth()->check() && auth()->user()->role_id == 1 ? route('admin') : (auth()->check() && auth()->user()->role_id == 2 ? route('user') : '#') }}">
-                <img src="{{ asset('icon/logo.png')}}" alt="Logo" style="height: 40px; margin-right: 10px;">    
+                <img src="{{ asset('icon/logo.png')}}" alt="Logo" style="height: 40px; margin-right: 10px;">
                 BSI GIS(Geographic Information System)
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -51,6 +51,11 @@
                         @guest
 
                         @else
+                        @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tambahkantor') }}">Tambah Kantor</a>
+                            </li>
+                        @endif
                         @if((auth()->user()->role_id == 2 || auth()->user()->role_id == 1))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('survey') }}">Survey</a>
